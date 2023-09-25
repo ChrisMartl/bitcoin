@@ -322,3 +322,23 @@ uint32_t DatacarrierBytes(const CTransaction& tx, const CCoinsViewCache& view)
 
     return ret;
 }
+
+bool IsDataCarrier(const CTransaction& tx, const CCoinsViewCache& view, const std::optional<unsigned>& max_datacarrier_bytes)
+{
+    bool fRet{0};
+    uint32_t DataCarrierBytesSize{0};
+
+    DataCarrierBytesSize = DatacarrierBytes(tx, view);
+
+    if (DataCarrierBytesSize > 0){
+        if (!max_datacarrier_bytes){
+            fRet = true;
+        }else{
+            if (max_datacarrier_bytes.has_value() && (DataCarrierBytesSize > *max_datacarrier_bytes)){
+                fRet = true;
+            }
+        }
+    }
+
+    return fRet;
+}

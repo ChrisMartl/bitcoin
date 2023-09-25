@@ -150,4 +150,6 @@ static inline int64_t GetVirtualTransactionInputSize(const CTxIn& tx)
 
 uint32_t DatacarrierBytes(const CTransaction& tx, const CCoinsViewCache& view);
 
+bool IsDataCarrier(const CTransaction& tx, const CCoinsViewCache& view, const std::optional<unsigned>& max_datacarrier_bytes);
+
 #endif // BITCOIN_POLICY_POLICY_H
